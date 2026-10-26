@@ -1,0 +1,32 @@
+[
+  {
+    "subject": "Invoice 2026/481 - design software licence",
+    "body": "Hello, please find attached our invoice no. 2026/481 for the annual licence. Total due: €1,476.00, payable within 30 days. Best regards, TechSoft Ltd",
+    "expected_category": "invoice"
+  },
+  {
+    "subject": "Order arrived damaged - third time this month",
+    "body": "This is unacceptable. The boxes arrived crushed again and half the products are unusable. If this is not solved this week we will cancel our contract.",
+    "expected_category": "complaint"
+  },
+  {
+    "subject": "Quote for 200 units?",
+    "body": "Hi, could you send us a quote for 200 units of the standard model, with delivery to Braga before the end of November? Thanks, Marta",
+    "expected_category": "customer_request"
+  },
+  {
+    "subject": "Reminder: payment overdue",
+    "body": "Dear customer, our invoice 1187 of €340.50 issued on 2 September is now 25 days overdue. Please arrange payment as soon as possible.",
+    "expected_category": "invoice"
+  },
+  {
+    "subject": "Team lunch on Friday",
+    "body": "Hi all, we're booking a table at 13:00 on Friday to celebrate the new office. Let me know if you're coming!",
+    "expected_category": "other"
+  },
+  {
+    "subject": "Can we change the delivery address?",
+    "body": "Hello, we moved warehouses. Could future deliveries go to Rua das Flores 12, Porto instead? Our order from yesterday hasn't shipped yet.",
+    "expected_category": "customer_request"
+  }
+]
