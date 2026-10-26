@@ -9,23 +9,25 @@ from src.llm import call_structured
 
 
 class Invoice(BaseModel):
-    supplier: str
+    supplier: str | None = Field(default=None, description="Company that issued the invoice, or null if not stated")
     date: date
     total_amount: float = Field(gt=0, description="Total including VAT")
     currency: str = Field(min_length=3, max_length=3, description="ISO code, e.g. EUR")
     category: Literal["software", "travel", "supplies", "services", "other"]
 
 
-SYSTEM_PROMPT = (
-    "You are an accounting assistant. Extract the invoice data and always use "
-    "the record_invoice tool. Dates must be in YYYY-MM-DD format."
-)
 
 
 def extract_invoice(text: str) -> Invoice:
+    system = (
+        f"You are an accounting assistant. Today is {date.today().isoformat()}. "
+        "Extract the invoice data and always use the record_invoice tool. "
+        "Dates must be in YYYY-MM-DD format; if the year is missing, use the most recent past date. "
+        "Never invent information: if the supplier is not stated, use null."
+    )
     return call_structured(
         output_model=Invoice,
-        system=SYSTEM_PROMPT,
+        system=system,
         user=f"Extract the data from this invoice:\n\n{text}",
         tool_name="record_invoice",
         tool_description="Records the data extracted from an invoice.",

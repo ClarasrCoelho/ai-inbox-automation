@@ -1,0 +1,254 @@
+{
+  "name": "AI Inbox",
+  "nodes": [
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.category }}",
+                    "rightValue": "invoice",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "73fac6c6-7b97-4730-919c-cc0be0f4c5af"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "invoice"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "0f4c5013-adab-4fbe-a8de-18fb8ebd1812",
+                    "leftValue": "={{ $json.category }}",
+                    "rightValue": "complaint",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "complaint"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "cd497be5-e454-4207-be5c-f18f7b5a5e76",
+                    "leftValue": "={{ $json.category }}",
+                    "rightValue": "customer_request",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "customer_request"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "other"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.5,
+      "position": [
+        528,
+        -16
+      ],
+      "id": "d9160077-cac9-46f4-bf52-88504a332cf1",
+      "name": "Switch"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        -16
+      ],
+      "id": "7d5ae1b9-97d5-4a06-80ac-c1332f59a061",
+      "name": "Test trigger"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8000/classify",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "subject",
+              "value": "={{ $json.subject }}"
+            },
+            {
+              "name": "body",
+              "value": "={{ $json.body }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        304,
+        -16
+      ],
+      "id": "74348bff-515e-4026-85c4-395d1d1622cd",
+      "name": "Classify"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8000/extract-invoice",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "subject",
+              "value": "={{ $('Test email').item.json.subject }}"
+            },
+            {
+              "name": "body",
+              "value": "={{ $('Test email').item.json.body }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        752,
+        -224
+      ],
+      "id": "6c87cda3-b181-4d52-91b6-006a59cc1673",
+      "name": "Extract invoice"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e844a002-eb2f-446c-95db-ed47e81b1577",
+              "name": "subject",
+              "value": "Reminder: payment overdue",
+              "type": "string"
+            },
+            {
+              "id": "fafcf4f9-6d0c-4567-8f26-58a89676bcf8",
+              "name": "body",
+              "value": "Our invoice 1187 of €340.50 issued on 2 September is now 25 days overdue. Please arrange payment.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        80,
+        -16
+      ],
+      "id": "46953da0-b7b9-4069-a060-4092362d8fa4",
+      "name": "Test email"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Extract invoice",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Test trigger": {
+      "main": [
+        [
+          {
+            "node": "Test email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Classify": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Test email": {
+      "main": [
+        [
+          {
+            "node": "Classify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "2d097dc3-8b0d-446d-bfb4-a9b7260e83d4",
+  "meta": {
+    "instanceId": "66a0f9414b934f77be72db030ca826101e2da71ae31118343042db5bf10e1c37"
+  },
+  "nodeGroups": [],
+  "id": "yJkAPnL6jrbVsuwc",
+  "tags": []
+}
