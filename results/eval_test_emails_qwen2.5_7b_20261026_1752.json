@@ -1,0 +1,200 @@
+{
+  "summary": {
+    "model": "qwen2.5:7b",
+    "dataset": "data\\test_emails.json",
+    "n_emails": 17,
+    "category_accuracy": 0.824,
+    "urgency_accuracy": 0.941,
+    "both_accuracy": 0.765,
+    "avg_seconds_per_email": 1.47
+  },
+  "rows": [
+    {
+      "subject": "Invoice #A-77 for catering services",
+      "expected_category": "invoice",
+      "predicted_category": "invoice",
+      "expected_urgency": "low",
+      "predicted_urgency": "low",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "The email is about a new invoice for catering services provided at an event.",
+      "note": ""
+    },
+    {
+      "subject": "Pagamento parcial da fatura 512",
+      "expected_category": "invoice",
+      "predicted_category": "invoice",
+      "expected_urgency": "high",
+      "predicted_urgency": "high",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "The email is about an overdue invoice payment.",
+      "note": ""
+    },
+    {
+      "subject": "Price increase from 1 January",
+      "expected_category": "other",
+      "predicted_category": "other",
+      "expected_urgency": "low",
+      "predicted_urgency": "low",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "Informing customers about a future price increase; no immediate action required.",
+      "note": "Supplier announcement about prices, but not a bill."
+    },
+    {
+      "subject": "Need 5 more boxes for Thursday's order",
+      "expected_category": "customer_request",
+      "predicted_category": "customer_request",
+      "expected_urgency": "high",
+      "predicted_urgency": "medium",
+      "category_ok": true,
+      "urgency_ok": false,
+      "reason": "Customer requests an order change for an upcoming shipment",
+      "note": ""
+    },
+    {
+      "subject": "Can we schedule a call next week?",
+      "expected_category": "customer_request",
+      "predicted_category": "customer_request",
+      "expected_urgency": "medium",
+      "predicted_urgency": "medium",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "The email is requesting a call to discuss a potential reseller agreement.",
+      "note": ""
+    },
+    {
+      "subject": "Produto com defeito",
+      "expected_category": "complaint",
+      "predicted_category": "complaint",
+      "expected_urgency": "medium",
+      "predicted_urgency": "medium",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "Customer is unhappy with a product and requests a replacement.",
+      "note": ""
+    },
+    {
+      "subject": "This is the last time we order from you",
+      "expected_category": "complaint",
+      "predicted_category": "complaint",
+      "expected_urgency": "high",
+      "predicted_urgency": "high",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "The customer is unhappy with the delivery and is threatening to switch suppliers.",
+      "note": ""
+    },
+    {
+      "subject": "Your password was changed",
+      "expected_category": "other",
+      "predicted_category": "other",
+      "expected_urgency": "low",
+      "predicted_urgency": "low",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "This email is about a password change in a supplier portal account and does not pertain to invoices, customer requests, or complaints.",
+      "note": "Automated security notice; could be argued as higher urgency."
+    },
+    {
+      "subject": "Application for the Junior Developer position",
+      "expected_category": "other",
+      "predicted_category": "other",
+      "expected_urgency": "low",
+      "predicted_urgency": "low",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "This email is an application for a job position, which does not fit into the predefined categories.",
+      "note": "Not a customer email at all."
+    },
+    {
+      "subject": "Thanks for the quick fix!",
+      "expected_category": "other",
+      "predicted_category": "complaint",
+      "expected_urgency": "low",
+      "predicted_urgency": "low",
+      "category_ok": false,
+      "urgency_ok": true,
+      "reason": "The email expresses satisfaction after a complaint was resolved, so it fits the 'complaint' category as per the definition provided.",
+      "note": "Positive follow-up to a past complaint."
+    },
+    {
+      "subject": "envio",
+      "expected_category": "customer_request",
+      "predicted_category": "customer_request",
+      "expected_urgency": "medium",
+      "predicted_urgency": "medium",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "The customer is asking for shipping cost information to Spain.",
+      "note": "Very short, informal Portuguese."
+    },
+    {
+      "subject": "URGENT!!! read now",
+      "expected_category": "other",
+      "predicted_category": "other",
+      "expected_urgency": "low",
+      "predicted_urgency": "low",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "This is a marketing email with a false sense of urgency.",
+      "note": ""
+    },
+    {
+      "subject": "Duplicate charge on my card",
+      "expected_category": "invoice",
+      "predicted_category": "complaint",
+      "expected_urgency": "medium",
+      "predicted_urgency": "medium",
+      "category_ok": false,
+      "urgency_ok": true,
+      "reason": "The customer is unhappy with a billing issue and expects a refund.",
+      "note": "About a payment (invoice) but also a complaint and a request."
+    },
+    {
+      "subject": "Delivery today?",
+      "expected_category": "complaint",
+      "predicted_category": "customer_request",
+      "expected_urgency": "high",
+      "predicted_urgency": "high",
+      "category_ok": false,
+      "urgency_ok": true,
+      "reason": "Customer is requesting information about the location of an order that has not shipped yet.",
+      "note": "Could also be read as a customer_request for information."
+    },
+    {
+      "subject": "Reunião de equipa adiada",
+      "expected_category": "other",
+      "predicted_category": "other",
+      "expected_urgency": "low",
+      "predicted_urgency": "low",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "The email is about rescheduling a team meeting, which is an internal communication.",
+      "note": ""
+    },
+    {
+      "subject": "Fatura com NIF da empresa",
+      "expected_category": "invoice",
+      "predicted_category": "invoice",
+      "expected_urgency": "medium",
+      "predicted_urgency": "medium",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "The email is requesting an invoice to be issued with the company's NIF, which is a request for a specific document.",
+      "note": "A request about a bill."
+    },
+    {
+      "subject": "Wrong product delivered",
+      "expected_category": "complaint",
+      "predicted_category": "complaint",
+      "expected_urgency": "high",
+      "predicted_urgency": "high",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "Customer received incorrect product and needs it fixed urgently for an upcoming event.",
+      "note": ""
+    }
+  ]
+}

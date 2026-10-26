@@ -41,6 +41,7 @@ Examples:
 - A new invoice payable in 30 days -> low.
 - An overdue payment notice, in any language -> high.
 - A change to an order that has not shipped yet -> high.
+- An angry email without a deadline or threat -> medium
 
 Always use the classify_email tool."""
 

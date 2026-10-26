@@ -1,0 +1,112 @@
+[
+  {
+    "subject": "Invoice #A-77 for catering services",
+    "body": "Dear client, attached is invoice #A-77 for the catering at your event on 18 October. Amount: €420.00, due in 15 days. Kind regards, Sabores do Norte",
+    "expected_category": "invoice",
+    "expected_urgency": "low"
+  },
+  {
+    "subject": "Pagamento parcial da fatura 512",
+    "body": "Boa tarde, recebemos apenas 300 € dos 900 € da fatura 512, que venceu a 10 de outubro. Pedimos que regularizem o valor em falta.",
+    "expected_category": "invoice",
+    "expected_urgency": "high"
+  },
+  {
+    "subject": "Price increase from 1 January",
+    "body": "Dear customer, due to higher raw material costs, our prices will increase by 5% from 1 January. Current orders are not affected. No action is needed on your side.",
+    "expected_category": "other",
+    "expected_urgency": "low",
+    "note": "Supplier announcement about prices, but not a bill."
+  },
+  {
+    "subject": "Need 5 more boxes for Thursday's order",
+    "body": "Hi, our order is scheduled to ship on Thursday. Could you add 5 more boxes of A4 paper? Please confirm by tomorrow so we can update our budget.",
+    "expected_category": "customer_request",
+    "expected_urgency": "high"
+  },
+  {
+    "subject": "Can we schedule a call next week?",
+    "body": "Hello, we're interested in becoming a reseller of your products in Galicia. Would you have 30 minutes for a call next week?",
+    "expected_category": "customer_request",
+    "expected_urgency": "medium"
+  },
+  {
+    "subject": "Produto com defeito",
+    "body": "Olá, o aspirador que comprei faz um barulho estranho desde o primeiro dia. Gostaria que o trocassem por um novo.",
+    "expected_category": "complaint",
+    "expected_urgency": "medium"
+  },
+  {
+    "subject": "This is the last time we order from you",
+    "body": "The delivery was three days late again. We are moving to another supplier from next month unless you can guarantee delivery dates in writing.",
+    "expected_category": "complaint",
+    "expected_urgency": "high"
+  },
+  {
+    "subject": "Your password was changed",
+    "body": "This is an automated message. The password for your supplier portal account was changed today. If this wasn't you, contact support.",
+    "expected_category": "other",
+    "expected_urgency": "low",
+    "note": "Automated security notice; could be argued as higher urgency."
+  },
+  {
+    "subject": "Application for the Junior Developer position",
+    "body": "Dear hiring team, please find attached my CV for the Junior Developer position advertised on your website. I look forward to hearing from you. Best, Tiago",
+    "expected_category": "other",
+    "expected_urgency": "low",
+    "note": "Not a customer email at all."
+  },
+  {
+    "subject": "Thanks for the quick fix!",
+    "body": "Just wanted to say thanks, the replacement part arrived yesterday and everything works perfectly now.",
+    "expected_category": "other",
+    "expected_urgency": "low",
+    "note": "Positive follow-up to a past complaint."
+  },
+  {
+    "subject": "envio",
+    "body": "quanto custa o envio p espanha?",
+    "expected_category": "customer_request",
+    "expected_urgency": "medium",
+    "note": "Very short, informal Portuguese."
+  },
+  {
+    "subject": "URGENT!!! read now",
+    "body": "Make €3,000 a week from home with our new crypto system. Only 10 places left, act within the next hour!",
+    "expected_category": "other",
+    "expected_urgency": "low"
+  },
+  {
+    "subject": "Duplicate charge on my card",
+    "body": "Hi, I was charged twice for invoice 3381 (€89.00). Could you please refund the duplicate payment?",
+    "expected_category": "invoice",
+    "expected_urgency": "medium",
+    "note": "About a payment (invoice) but also a complaint and a request."
+  },
+  {
+    "subject": "Delivery today?",
+    "body": "Our order was supposed to arrive today and our shop opens tomorrow morning with empty shelves. Please tell us where it is as soon as possible.",
+    "expected_category": "complaint",
+    "expected_urgency": "high",
+    "note": "Could also be read as a customer_request for information."
+  },
+  {
+    "subject": "Reunião de equipa adiada",
+    "body": "Olá a todos, a reunião de equipa desta quinta-feira foi adiada para a próxima terça às 10h. Obrigada!",
+    "expected_category": "other",
+    "expected_urgency": "low"
+  },
+  {
+    "subject": "Fatura com NIF da empresa",
+    "body": "Bom dia, podem emitir a fatura da encomenda 4471 com o NIF da nossa empresa? Precisamos dela até ao fim da semana para a contabilidade.",
+    "expected_category": "invoice",
+    "expected_urgency": "medium",
+    "note": "A request about a bill."
+  },
+  {
+    "subject": "Wrong product delivered",
+    "body": "We ordered 20 black chairs and received 20 white ones. We have an event the day after tomorrow, so we need the correct chairs by tomorrow.",
+    "expected_category": "complaint",
+    "expected_urgency": "high"
+  }
+]

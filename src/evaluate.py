@@ -1,12 +1,14 @@
 """Evaluate the email classifier on the labelled dataset.
 
-Usage:  python -m src.evaluate
+Usage:  python -m src.evaluate                          (development set)
+        python -m src.evaluate data/test_emails.json    (held-out test set)
 
 Prints category and urgency accuracy, lists every mistake, and saves the
 full results to results/ so different models and prompts can be compared.
 """
 import json
 import re
+import sys
 import time
 from collections import Counter
 from datetime import datetime
@@ -15,12 +17,14 @@ from pathlib import Path
 from src.classification import classify_email
 from src.llm import MODEL
 
-DATASET = Path("data/sample_emails.json")
+DEFAULT_DATASET = Path("data/sample_emails.json")
 RESULTS_DIR = Path("results")
 
 
 def main() -> None:
-    emails = json.loads(DATASET.read_text(encoding="utf-8"))
+    dataset = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_DATASET
+    emails = json.loads(dataset.read_text(encoding="utf-8"))
+    print(f"Dataset: {dataset} ({len(emails)} emails)\n")
     rows = []
     start = time.perf_counter()
 
@@ -53,6 +57,7 @@ def main() -> None:
     both_acc = sum(r["category_ok"] and r["urgency_ok"] for r in rows) / n
 
     print(f"\nModel: {MODEL}")
+    print(f"Dataset: {dataset}")
     print(f"Category accuracy: {category_acc:.0%}")
     print(f"Urgency accuracy:  {urgency_acc:.0%}")
     print(f"Both correct:      {both_acc:.0%}")
@@ -82,9 +87,10 @@ def main() -> None:
 
     RESULTS_DIR.mkdir(exist_ok=True)
     safe_model = re.sub(r"[^\w.-]", "_", MODEL)  # e.g. "qwen2.5:7b" -> "qwen2.5_7b"
-    out = RESULTS_DIR / f"eval_{safe_model}_{datetime.now():%Y%m%d_%H%M}.json"
+    out = RESULTS_DIR / f"eval_{dataset.stem}_{safe_model}_{datetime.now():%Y%m%d_%H%M}.json"
     summary = {
         "model": MODEL,
+        "dataset": str(dataset),
         "n_emails": n,
         "category_accuracy": round(category_acc, 3),
         "urgency_accuracy": round(urgency_acc, 3),
