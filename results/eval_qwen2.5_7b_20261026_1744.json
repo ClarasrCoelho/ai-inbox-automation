@@ -1,0 +1,276 @@
+{
+  "summary": {
+    "model": "qwen2.5:7b",
+    "n_emails": 24,
+    "category_accuracy": 0.958,
+    "urgency_accuracy": 0.708,
+    "both_accuracy": 0.667,
+    "avg_seconds_per_email": 1.45
+  },
+  "rows": [
+    {
+      "subject": "Invoice 2026/481 - design software licence",
+      "expected_category": "invoice",
+      "predicted_category": "invoice",
+      "expected_urgency": "low",
+      "predicted_urgency": "medium",
+      "category_ok": true,
+      "urgency_ok": false,
+      "reason": "The email is about an invoice for an annual licence, which is a bill that needs to be paid.",
+      "note": ""
+    },
+    {
+      "subject": "Order arrived damaged - third time this month",
+      "expected_category": "complaint",
+      "predicted_category": "complaint",
+      "expected_urgency": "high",
+      "predicted_urgency": "high",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "Customer is unhappy with damaged products and threatens to cancel the contract if the issue is not resolved within a week.",
+      "note": ""
+    },
+    {
+      "subject": "Quote for 200 units?",
+      "expected_category": "customer_request",
+      "predicted_category": "customer_request",
+      "expected_urgency": "medium",
+      "predicted_urgency": "medium",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "The email is requesting a quote for a specific product with delivery details.",
+      "note": ""
+    },
+    {
+      "subject": "Reminder: payment overdue",
+      "expected_category": "invoice",
+      "predicted_category": "invoice",
+      "expected_urgency": "high",
+      "predicted_urgency": "high",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "The email is about an overdue invoice, which is a reminder to pay.",
+      "note": ""
+    },
+    {
+      "subject": "Team lunch on Friday",
+      "expected_category": "other",
+      "predicted_category": "other",
+      "expected_urgency": "low",
+      "predicted_urgency": "low",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "This email is about a social event and does not pertain to business operations, invoices, customer requests, or complaints.",
+      "note": ""
+    },
+    {
+      "subject": "Can we change the delivery address?",
+      "expected_category": "customer_request",
+      "predicted_category": "customer_request",
+      "expected_urgency": "high",
+      "predicted_urgency": "medium",
+      "category_ok": true,
+      "urgency_ok": false,
+      "reason": "The customer is requesting a change to an order's delivery address. This falls under a customer_request as per the rules provided.",
+      "note": ""
+    },
+    {
+      "subject": "Fatura n.º FT 2026/1032",
+      "expected_category": "invoice",
+      "predicted_category": "invoice",
+      "expected_urgency": "low",
+      "predicted_urgency": "medium",
+      "category_ok": true,
+      "urgency_ok": false,
+      "reason": "The email is about a new invoice for services rendered in October with a due date of November 30th.",
+      "note": ""
+    },
+    {
+      "subject": "Atendimento péssimo",
+      "expected_category": "complaint",
+      "predicted_category": "complaint",
+      "expected_urgency": "medium",
+      "predicted_urgency": "high",
+      "category_ok": true,
+      "urgency_ok": false,
+      "reason": "The customer is unhappy with the service and demands a solution.",
+      "note": "Angry tone but no cancellation threat or 1-2 day deadline, so medium by the rubric."
+    },
+    {
+      "subject": "Pedido de informação",
+      "expected_category": "customer_request",
+      "predicted_category": "customer_request",
+      "expected_urgency": "medium",
+      "predicted_urgency": "medium",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "Customer is requesting information about delivery to the Azores and usual delivery times.",
+      "note": ""
+    },
+    {
+      "subject": "Refund for broken kettle",
+      "expected_category": "complaint",
+      "predicted_category": "complaint",
+      "expected_urgency": "medium",
+      "predicted_urgency": "medium",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "The customer is unhappy with a product (kettle) and expects it to be fixed by requesting a refund or replacement.",
+      "note": "Complaint that also contains a request (refund)."
+    },
+    {
+      "subject": "Wrong amount on invoice 2291",
+      "expected_category": "invoice",
+      "predicted_category": "invoice",
+      "expected_urgency": "medium",
+      "predicted_urgency": "medium",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "The email is about a discrepancy in the amount charged on an invoice, which falls under the category of an invoice requiring a correction.",
+      "note": "Invoice dispute: about a bill (invoice) but the customer is also unhappy (complaint)."
+    },
+    {
+      "subject": "Re: delivery",
+      "expected_category": "other",
+      "predicted_category": "other",
+      "expected_urgency": "low",
+      "predicted_urgency": "low",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "The email is a brief response thanking someone, which does not pertain to invoices, customer requests, or complaints.",
+      "note": "Very short reply with no context."
+    },
+    {
+      "subject": "order",
+      "expected_category": "complaint",
+      "predicted_category": "complaint",
+      "expected_urgency": "medium",
+      "predicted_urgency": "high",
+      "category_ok": true,
+      "urgency_ok": false,
+      "reason": "The customer is unhappy because their order has not arrived despite payment being made 2 weeks ago.",
+      "note": "Badly written; could also be read as a customer_request for information."
+    },
+    {
+      "subject": "Our October newsletter: 5 tips for small businesses",
+      "expected_category": "other",
+      "predicted_category": "other",
+      "expected_urgency": "low",
+      "predicted_urgency": "low",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "This is a marketing newsletter with no business-related requests or issues.",
+      "note": ""
+    },
+    {
+      "subject": "Cancelamento do contrato",
+      "expected_category": "complaint",
+      "predicted_category": "invoice",
+      "expected_urgency": "high",
+      "predicted_urgency": "high",
+      "category_ok": false,
+      "urgency_ok": true,
+      "reason": "The email is about a threat to cancel the contract due to an invoice issue, which requires urgent attention.",
+      "note": "Mentions billing, but the main point is a cancellation threat."
+    },
+    {
+      "subject": "Payment received - thank you",
+      "expected_category": "invoice",
+      "predicted_category": "invoice",
+      "expected_urgency": "low",
+      "predicted_urgency": "low",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "This email confirms receipt of a payment, indicating no further action is needed.",
+      "note": ""
+    },
+    {
+      "subject": "Urgent: can we add 10 units to tomorrow's shipment?",
+      "expected_category": "customer_request",
+      "predicted_category": "customer_request",
+      "expected_urgency": "high",
+      "predicted_urgency": "high",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "The email is requesting a change to an order that has not shipped yet, which affects the current order.",
+      "note": ""
+    },
+    {
+      "subject": "Office closed on 1 November",
+      "expected_category": "other",
+      "predicted_category": "other",
+      "expected_urgency": "low",
+      "predicted_urgency": "low",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "This email is about a company-wide notice regarding office closure on a specific date.",
+      "note": ""
+    },
+    {
+      "subject": "You've won a €500 gift card!",
+      "expected_category": "other",
+      "predicted_category": "other",
+      "expected_urgency": "low",
+      "predicted_urgency": "low",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "This is a marketing email with a fake sense of urgency.",
+      "note": "Spam with fake urgency: should not be high."
+    },
+    {
+      "subject": "Aviso de pagamento em atraso",
+      "expected_category": "invoice",
+      "predicted_category": "invoice",
+      "expected_urgency": "high",
+      "predicted_urgency": "medium",
+      "category_ok": true,
+      "urgency_ok": false,
+      "reason": "The email is about an overdue invoice reminding for payment.",
+      "note": ""
+    },
+    {
+      "subject": "Feedback on last delivery",
+      "expected_category": "complaint",
+      "predicted_category": "complaint",
+      "expected_urgency": "low",
+      "predicted_urgency": "low",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "Customer is unhappy with the service provided during the delivery.",
+      "note": "Mild complaint that explicitly needs no action."
+    },
+    {
+      "subject": "Can you resend invoice 1187?",
+      "expected_category": "invoice",
+      "predicted_category": "invoice",
+      "expected_urgency": "medium",
+      "predicted_urgency": "low",
+      "category_ok": true,
+      "urgency_ok": false,
+      "reason": "Request for resend of lost invoice",
+      "note": "A request, but about a bill, so invoice by the rubric."
+    },
+    {
+      "subject": "Solicitud de presupuesto",
+      "expected_category": "customer_request",
+      "predicted_category": "customer_request",
+      "expected_urgency": "medium",
+      "predicted_urgency": "medium",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "Customer is requesting a quote for 50 units of a standard model.",
+      "note": ""
+    },
+    {
+      "subject": "Final warning before legal action",
+      "expected_category": "complaint",
+      "predicted_category": "complaint",
+      "expected_urgency": "high",
+      "predicted_urgency": "high",
+      "category_ok": true,
+      "urgency_ok": true,
+      "reason": "The customer is unhappy with a product and is threatening legal action if a compensation proposal is not received within 48 hours.",
+      "note": ""
+    }
+  ]
+}

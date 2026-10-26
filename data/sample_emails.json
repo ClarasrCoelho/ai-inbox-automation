@@ -2,31 +2,154 @@
   {
     "subject": "Invoice 2026/481 - design software licence",
     "body": "Hello, please find attached our invoice no. 2026/481 for the annual licence. Total due: €1,476.00, payable within 30 days. Best regards, TechSoft Ltd",
-    "expected_category": "invoice"
+    "expected_category": "invoice",
+    "expected_urgency": "low"
   },
   {
     "subject": "Order arrived damaged - third time this month",
     "body": "This is unacceptable. The boxes arrived crushed again and half the products are unusable. If this is not solved this week we will cancel our contract.",
-    "expected_category": "complaint"
+    "expected_category": "complaint",
+    "expected_urgency": "high"
   },
   {
     "subject": "Quote for 200 units?",
     "body": "Hi, could you send us a quote for 200 units of the standard model, with delivery to Braga before the end of November? Thanks, Marta",
-    "expected_category": "customer_request"
+    "expected_category": "customer_request",
+    "expected_urgency": "medium"
   },
   {
     "subject": "Reminder: payment overdue",
     "body": "Dear customer, our invoice 1187 of €340.50 issued on 2 September is now 25 days overdue. Please arrange payment as soon as possible.",
-    "expected_category": "invoice"
+    "expected_category": "invoice",
+    "expected_urgency": "high"
   },
   {
     "subject": "Team lunch on Friday",
     "body": "Hi all, we're booking a table at 13:00 on Friday to celebrate the new office. Let me know if you're coming!",
-    "expected_category": "other"
+    "expected_category": "other",
+    "expected_urgency": "low"
   },
   {
     "subject": "Can we change the delivery address?",
     "body": "Hello, we moved warehouses. Could future deliveries go to Rua das Flores 12, Porto instead? Our order from yesterday hasn't shipped yet.",
-    "expected_category": "customer_request"
+    "expected_category": "customer_request",
+    "expected_urgency": "high"
+  },
+  {
+    "subject": "Fatura n.º FT 2026/1032",
+    "body": "Bom dia, segue em anexo a fatura referente aos serviços de outubro, no valor de 615,00 €, com vencimento a 30 de novembro. Com os melhores cumprimentos, Contabilidade Silva & Filhos",
+    "expected_category": "invoice",
+    "expected_urgency": "low"
+  },
+  {
+    "subject": "Atendimento péssimo",
+    "body": "Liguei três vezes esta semana e ninguém me ajudou. Continuo sem acesso à minha conta. Exijo uma solução.",
+    "expected_category": "complaint",
+    "expected_urgency": "medium",
+    "note": "Angry tone but no cancellation threat or 1-2 day deadline, so medium by the rubric."
+  },
+  {
+    "subject": "Pedido de informação",
+    "body": "Bom dia, gostaria de saber se fazem entregas nos Açores e quais os prazos habituais. Obrigado, Rui",
+    "expected_category": "customer_request",
+    "expected_urgency": "medium"
+  },
+  {
+    "subject": "Refund for broken kettle",
+    "body": "The kettle I bought stopped working after two days. I'd like a refund or a replacement, please.",
+    "expected_category": "complaint",
+    "expected_urgency": "medium",
+    "note": "Complaint that also contains a request (refund)."
+  },
+  {
+    "subject": "Wrong amount on invoice 2291",
+    "body": "Your invoice 2291 charges us for 50 units, but we only received 40. Please send us a corrected invoice.",
+    "expected_category": "invoice",
+    "expected_urgency": "medium",
+    "note": "Invoice dispute: about a bill (invoice) but the customer is also unhappy (complaint)."
+  },
+  {
+    "subject": "Re: delivery",
+    "body": "ok thanks",
+    "expected_category": "other",
+    "expected_urgency": "low",
+    "note": "Very short reply with no context."
+  },
+  {
+    "subject": "order",
+    "body": "where is my order??? paid 2 weeks ago and nothing arrived",
+    "expected_category": "complaint",
+    "expected_urgency": "medium",
+    "note": "Badly written; could also be read as a customer_request for information."
+  },
+  {
+    "subject": "Our October newsletter: 5 tips for small businesses",
+    "body": "In this month's edition: how to manage cash flow, the best tools for remote teams, and upcoming trade fairs in Porto. Unsubscribe at any time.",
+    "expected_category": "other",
+    "expected_urgency": "low"
+  },
+  {
+    "subject": "Cancelamento do contrato",
+    "body": "Se o problema da faturação não for resolvido até amanhã, vamos cancelar o contrato convosco.",
+    "expected_category": "complaint",
+    "expected_urgency": "high",
+    "note": "Mentions billing, but the main point is a cancellation threat."
+  },
+  {
+    "subject": "Payment received - thank you",
+    "body": "We confirm receipt of your payment of €1,476.00 for invoice 2026/481. No further action is required.",
+    "expected_category": "invoice",
+    "expected_urgency": "low"
+  },
+  {
+    "subject": "Urgent: can we add 10 units to tomorrow's shipment?",
+    "body": "Hi, our order ships tomorrow morning. Is it still possible to add 10 more units of the standard model? Please confirm today if you can.",
+    "expected_category": "customer_request",
+    "expected_urgency": "high"
+  },
+  {
+    "subject": "Office closed on 1 November",
+    "body": "Hi team, a reminder that the office will be closed on 1 November for the public holiday. Enjoy the long weekend!",
+    "expected_category": "other",
+    "expected_urgency": "low"
+  },
+  {
+    "subject": "You've won a €500 gift card!",
+    "body": "Congratulations! Click the link below within 24 hours to claim your €500 gift card. Don't miss out!",
+    "expected_category": "other",
+    "expected_urgency": "low",
+    "note": "Spam with fake urgency: should not be high."
+  },
+  {
+    "subject": "Aviso de pagamento em atraso",
+    "body": "Exmos. Senhores, informamos que a fatura n.º 845, no valor de 1.230,00 €, se encontra vencida há 15 dias. Agradecemos a regularização com a maior brevidade.",
+    "expected_category": "invoice",
+    "expected_urgency": "high"
+  },
+  {
+    "subject": "Feedback on last delivery",
+    "body": "The driver was a bit rude when dropping off our order today. Just wanted to let you know, no need to reply.",
+    "expected_category": "complaint",
+    "expected_urgency": "low",
+    "note": "Mild complaint that explicitly needs no action."
+  },
+  {
+    "subject": "Can you resend invoice 1187?",
+    "body": "Hi, we lost the PDF of invoice 1187. Could you send it again, please?",
+    "expected_category": "invoice",
+    "expected_urgency": "medium",
+    "note": "A request, but about a bill, so invoice by the rubric."
+  },
+  {
+    "subject": "Solicitud de presupuesto",
+    "body": "Hola, ¿podrían enviarnos un presupuesto para 50 unidades del modelo estándar? Gracias, Lucía",
+    "expected_category": "customer_request",
+    "expected_urgency": "medium"
+  },
+  {
+    "subject": "Final warning before legal action",
+    "body": "Your product leaked and damaged our warehouse floor. If we do not receive a compensation proposal within 48 hours, our lawyer will contact you.",
+    "expected_category": "complaint",
+    "expected_urgency": "high"
   }
 ]
