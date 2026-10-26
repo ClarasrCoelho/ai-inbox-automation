@@ -1,4 +1,4 @@
-anthropic
+openai
 pydantic
 python-dotenv
 fastapi

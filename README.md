@@ -27,7 +27,7 @@ webhooks between n8n and FastAPI, OAuth for Gmail / Google Sheets -->
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env   # then add your API key
+cp .env.example .env   # then add your API key (Gemini free tier or Ollama)
 python -m src.extraction
 python -m src.classification
 ```
