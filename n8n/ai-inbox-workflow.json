@@ -89,8 +89,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.5,
       "position": [
-        528,
-        -16
+        544,
+        -48
       ],
       "id": "d9160077-cac9-46f4-bf52-88504a332cf1",
       "name": "Switch"
@@ -132,7 +132,8 @@
         -16
       ],
       "id": "74348bff-515e-4026-85c4-395d1d1622cd",
-      "name": "Classify"
+      "name": "Classify",
+      "retryOnFail": true
     },
     {
       "parameters": {
@@ -160,12 +161,19 @@
         -224
       ],
       "id": "6c87cda3-b181-4d52-91b6-006a59cc1673",
-      "name": "Extract invoice"
+      "name": "Extract invoice",
+      "retryOnFail": true
     },
     {
       "parameters": {
         "assignments": {
           "assignments": [
+            {
+              "id": "c3e6dabf-5fed-4f40-a752-46ac218e9f15",
+              "name": "from",
+              "value": "billing@acme-supplies.com",
+              "type": "string"
+            },
             {
               "id": "e844a002-eb2f-446c-95db-ed47e81b1577",
               "name": "subject",
@@ -190,6 +198,65 @@
       ],
       "id": "46953da0-b7b9-4069-a060-4092362d8fa4",
       "name": "Test email"
+    },
+    {
+      "parameters": {
+        "chatId": "6637514682",
+        "text": "=🚨 Urgent email\nFrom: {{ $('Test email').item.json.from }}\nSubject: {{ $('Test email').item.json.subject }}\nCategory: {{ $json.category }}\nReason: {{ $json.reason }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        704,
+        240
+      ],
+      "id": "015ebf96-60af-4b02-b984-894ed130dff8",
+      "name": "Send a text message",
+      "webhookId": "97392956-9a25-4522-bd84-1385902a84fd",
+      "retryOnFail": true,
+      "credentials": {
+        "telegramApi": {
+          "id": "SWA7p8JpVM6juTsV",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "deec9bc4-aea4-4ea2-bcfa-c75ab0e9d738",
+              "leftValue": "={{ $json.urgency }}",
+              "rightValue": "high",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        448,
+        256
+      ],
+      "id": "82f38f8e-1c29-4ecf-ae76-4ef205613713",
+      "name": "Is Urgent?"
     }
   ],
   "pinData": {},
@@ -223,6 +290,11 @@
             "node": "Switch",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Is Urgent?",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -237,6 +309,17 @@
           }
         ]
       ]
+    },
+    "Is Urgent?": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -244,8 +327,9 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "2d097dc3-8b0d-446d-bfb4-a9b7260e83d4",
+  "versionId": "beb536b0-0648-4fbb-be56-58bd5b072451",
   "meta": {
+    "templateCredsSetupCompleted": true,
     "instanceId": "66a0f9414b934f77be72db030ca826101e2da71ae31118343042db5bf10e1c37"
   },
   "nodeGroups": [],
