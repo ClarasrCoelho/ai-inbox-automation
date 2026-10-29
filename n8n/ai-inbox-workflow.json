@@ -96,17 +96,6 @@
       "name": "Switch"
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -144,
-        -16
-      ],
-      "id": "7d5ae1b9-97d5-4a06-80ac-c1332f59a061",
-      "name": "Test trigger"
-    },
-    {
       "parameters": {
         "method": "POST",
         "url": "http://127.0.0.1:8000/classify",
@@ -144,11 +133,11 @@
           "parameters": [
             {
               "name": "subject",
-              "value": "={{ $('Test email').item.json.subject }}"
+              "value": "={{ $('Normalize email').item.json.subject }}"
             },
             {
               "name": "body",
-              "value": "={{ $('Test email').item.json.body }}"
+              "value": "={{ $('Normalize email').item.json.body }}"
             }
           ]
         },
@@ -166,43 +155,8 @@
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "c3e6dabf-5fed-4f40-a752-46ac218e9f15",
-              "name": "from",
-              "value": "billing@acme-supplies.com",
-              "type": "string"
-            },
-            {
-              "id": "e844a002-eb2f-446c-95db-ed47e81b1577",
-              "name": "subject",
-              "value": "Reminder: payment overdue",
-              "type": "string"
-            },
-            {
-              "id": "fafcf4f9-6d0c-4567-8f26-58a89676bcf8",
-              "name": "body",
-              "value": "Our invoice 1187 of €340.50 issued on 2 September is now 25 days overdue. Please arrange payment.",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.5,
-      "position": [
-        80,
-        -16
-      ],
-      "id": "46953da0-b7b9-4069-a060-4092362d8fa4",
-      "name": "Test email"
-    },
-    {
-      "parameters": {
         "chatId": "6637514682",
-        "text": "=🚨 Urgent email\nFrom: {{ $('Test email').item.json.from }}\nSubject: {{ $('Test email').item.json.subject }}\nCategory: {{ $json.category }}\nReason: {{ $json.reason }}",
+        "text": "=🚨 Urgent email\nFrom: {{ $('Normalize email').item.json.from }}\nSubject: {{ $('Normalize email').item.json.subject }}\nCategory: {{ $json.category }}\nReason: {{ $json.reason }}",
         "additionalFields": {
           "appendAttribution": false
         }
@@ -257,6 +211,72 @@
       ],
       "id": "82f38f8e-1c29-4ecf-ae76-4ef205613713",
       "name": "Is Urgent?"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "maxResults": 5,
+        "filters": {
+          "q": "to:claracoelho1108+aiinbox@gmail.com"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -144,
+        -16
+      ],
+      "id": "7e3b4ac6-f986-4ae8-ba0f-f60e2dfd838f",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YbEGwWlB8exFI2rK",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c3e6dabf-5fed-4f40-a752-46ac218e9f15",
+              "name": "=from",
+              "value": "={{ $json.from.value[0].address }}",
+              "type": "string"
+            },
+            {
+              "id": "e844a002-eb2f-446c-95db-ed47e81b1577",
+              "name": "=subject",
+              "value": "={{ $json.subject }}",
+              "type": "string"
+            },
+            {
+              "id": "8d86c2fa-7ca3-400a-bce9-75a998741048",
+              "name": "=body",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        80,
+        -16
+      ],
+      "id": "46953da0-b7b9-4069-a060-4092362d8fa4",
+      "name": "Normalize email"
     }
   ],
   "pinData": {},
@@ -266,17 +286,6 @@
         [
           {
             "node": "Extract invoice",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Test trigger": {
-      "main": [
-        [
-          {
-            "node": "Test email",
             "type": "main",
             "index": 0
           }
@@ -299,22 +308,33 @@
         ]
       ]
     },
-    "Test email": {
+    "Is Urgent?": {
       "main": [
         [
           {
-            "node": "Classify",
+            "node": "Send a text message",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Is Urgent?": {
+    "Gmail Trigger": {
       "main": [
         [
           {
-            "node": "Send a text message",
+            "node": "Normalize email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize email": {
+      "main": [
+        [
+          {
+            "node": "Classify",
             "type": "main",
             "index": 0
           }
@@ -327,7 +347,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "beb536b0-0648-4fbb-be56-58bd5b072451",
+  "versionId": "d844322b-daa1-4e2e-b251-f48dbf523309",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "66a0f9414b934f77be72db030ca826101e2da71ae31118343042db5bf10e1c37"
