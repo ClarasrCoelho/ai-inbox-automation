@@ -96,9 +96,19 @@ def call_structured(
             return output_model.model_validate_json(call.function.arguments)
         except ValidationError as error:
             print(f"Invalid response, asking for a fix: {error.error_count()} error(s)")
+            print(f"  raw arguments: {call.function.arguments}")
+            print(f"  error: {error}")
             messages += [
                 message.model_dump(exclude_none=True),
-                {"role": "tool", "tool_call_id": call.id, "content": f"Invalid data, please fix: {error}"},
+                {
+                    "role": "tool",
+                    "tool_call_id": call.id,
+                    "content": (
+                        f"Invalid data, please fix: {error}\n"
+                        "Include every field. If a value is not stated in the text, "
+                        "set it explicitly to null. Never make up a value to pass validation."
+                    ),
+                },
             ]
 
     raise RuntimeError(f"Could not get a valid {output_model.__name__} after {max_attempts} attempts.")

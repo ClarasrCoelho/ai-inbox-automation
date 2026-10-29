@@ -3,7 +3,7 @@ import json
 from datetime import date
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from src.llm import call_structured
 
@@ -11,14 +11,35 @@ from src.llm import call_structured
 class Invoice(BaseModel):
     supplier: str | None = Field(description="Company that issued the invoice, or null if not stated")
     invoice_number: str | None = Field(description="Invoice identifier as written, e.g. '2026/481' or '4521', or null if not stated")
-    invoice_date: date | None = Field(description="Date the invoice was issued, or null if not stated")
+    invoice_date: date | None = Field(
+        description="Date the invoice or receipt was issued, whatever its label "
+                    "(e.g. 'Date', 'Issue date', 'Invoice date', 'Receipt date', 'Data'). "
+                    "A payment deadline ('due on', 'pay by') is not an issue date. Null if not written.",
+    )
     due_date: date | None = Field(
         description="Explicit payment deadline date, e.g. 'due on 15 October' or 'pay by 2026-11-01'. "
                     "'Total due' is an amount, not a date. Null if no deadline date is written.",
     )
     total_amount: float = Field(gt=0, description="Total including VAT")
     currency: str = Field(min_length=3, max_length=3, description="ISO code, e.g. EUR")
-    category: Literal["software", "travel", "supplies", "services", "other"]
+    category: Literal["software", "travel", "supplies", "services", "other"] = Field(
+        description="software: licences, SaaS, hosting. travel: transport, taxis, flights, hotels. "
+                    "supplies: physical goods and office materials. services: consulting, design, "
+                    "professional work. other: anything else.",
+    )
+
+    @field_validator("supplier", "invoice_number", "invoice_date", "due_date", mode="before")
+    @classmethod
+    def null_strings_to_none(cls, value):
+        """Small models sometimes write 'null' or a placeholder instead of a JSON null."""
+        if isinstance(value, str):
+            text = value.strip().lower()
+            if text in {"null", "none", "n/a", ""} or any(
+                word in text for word in ("unknown", "not stated", "not specified", "not provided")
+            ):
+                return None
+        return value
+
 
 def extract_invoice(text: str, reference_date: date | None = None) -> Invoice:
     ref = reference_date or date.today()
