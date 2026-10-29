@@ -50,6 +50,7 @@ def call_structured(
     tool_description: str,
     temperature: float = 0,
     max_attempts: int = 3,
+    seed: int | None = 42,
 ) -> T:
     """Ask the LLM for an answer shaped like `output_model`, using function calling.
 
@@ -77,6 +78,7 @@ def call_structured(
             tools=[tool],
             tool_choice="required",
             temperature=temperature,
+            seed=seed,
         )
         message = response.choices[0].message
 
