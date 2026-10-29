@@ -89,7 +89,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.5,
       "position": [
-        544,
+        496,
         -48
       ],
       "id": "d9160077-cac9-46f4-bf52-88504a332cf1",
@@ -206,7 +206,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.4,
       "position": [
-        448,
+        496,
         256
       ],
       "id": "82f38f8e-1c29-4ecf-ae76-4ef205613713",
@@ -264,6 +264,12 @@
               "name": "=body",
               "value": "={{ $json.text }}",
               "type": "string"
+            },
+            {
+              "id": "f39ab2d3-f8cb-479b-9bc6-2da343cad462",
+              "name": "received_at",
+              "value": "={{ $json.date }}",
+              "type": "string"
             }
           ]
         },
@@ -277,6 +283,254 @@
       ],
       "id": "46953da0-b7b9-4069-a060-4092362d8fa4",
       "name": "Normalize email"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1V_eUPd3NaOCYyAVnV80gyY6K-iSaTS_wbJdpM14gAos",
+          "mode": "list",
+          "cachedResultName": "AI Inbox Log",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V_eUPd3NaOCYyAVnV80gyY6K-iSaTS_wbJdpM14gAos/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Emails",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V_eUPd3NaOCYyAVnV80gyY6K-iSaTS_wbJdpM14gAos/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "received_at": "={{ $('Normalize email').item.json.received_at }}",
+            "from": "={{ $('Normalize email').item.json.from }}",
+            "subject": "={{ $('Normalize email').item.json.subject }}",
+            "category": "={{ $json.category }}",
+            "urgency": "={{ $json.urgency }}",
+            "reason": "={{ $json.reason }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "received_at",
+              "displayName": "received_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "from",
+              "displayName": "from",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "subject",
+              "displayName": "subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "category",
+              "displayName": "category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "urgency",
+              "displayName": "urgency",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "reason",
+              "displayName": "reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        496,
+        -336
+      ],
+      "id": "76553983-da63-43e5-a728-7869f2887771",
+      "name": "Log Email",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ru0EecPFrokEJ5kU",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1V_eUPd3NaOCYyAVnV80gyY6K-iSaTS_wbJdpM14gAos",
+          "mode": "list",
+          "cachedResultName": "AI Inbox Log",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V_eUPd3NaOCYyAVnV80gyY6K-iSaTS_wbJdpM14gAos/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1620798177,
+          "mode": "list",
+          "cachedResultName": "Invoices",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V_eUPd3NaOCYyAVnV80gyY6K-iSaTS_wbJdpM14gAos/edit#gid=1620798177"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "supplier": "={{ $json.supplier }}",
+            "invoice_number": "={{ $json.invoice_number }}",
+            "invoice_date": "={{ $json.invoice_date }}",
+            "due_date": "={{ $json.due_date }}",
+            "total_amount": "={{ $json.total_amount }}",
+            "currency": "={{ $json.currency }}",
+            "category": "={{ $json.category }}",
+            "from": "={{ $('Normalize email').item.json.from }}",
+            "received_at": "={{ $('Normalize email').item.json.received_at }}",
+            "subject": "={{ $('Normalize email').item.json.subject }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "received_at",
+              "displayName": "received_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "from",
+              "displayName": "from",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "subject",
+              "displayName": "subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "supplier",
+              "displayName": "supplier",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "invoice_number",
+              "displayName": "invoice_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "invoice_date",
+              "displayName": "invoice_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "due_date",
+              "displayName": "due_date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "total_amount",
+              "displayName": "total_amount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "currency",
+              "displayName": "currency",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "category",
+              "displayName": "category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        976,
+        -224
+      ],
+      "id": "d81c7069-f2fd-429e-9daa-2aa71d3bf975",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ru0EecPFrokEJ5kU",
+          "name": "Google Sheets account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -302,6 +556,11 @@
           },
           {
             "node": "Is Urgent?",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Log Email",
             "type": "main",
             "index": 0
           }
@@ -340,6 +599,17 @@
           }
         ]
       ]
+    },
+    "Extract invoice": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -347,7 +617,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "d844322b-daa1-4e2e-b251-f48dbf523309",
+  "versionId": "eee50f39-6de9-4b5f-870c-ac8f7660eb10",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "66a0f9414b934f77be72db030ca826101e2da71ae31118343042db5bf10e1c37"
