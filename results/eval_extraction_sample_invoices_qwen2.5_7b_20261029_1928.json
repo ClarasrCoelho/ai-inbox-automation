@@ -1,0 +1,212 @@
+{
+  "summary": {
+    "model": "qwen2.5:7b",
+    "dataset": "data\\sample_invoices.json",
+    "n_invoices": 6,
+    "field_accuracy": {
+      "supplier": 0.833,
+      "invoice_number": 1.0,
+      "invoice_date": 0.833,
+      "due_date": 1.0,
+      "total_amount": 1.0,
+      "currency": 1.0,
+      "category": 0.833
+    },
+    "all_fields_accuracy": 0.5,
+    "avg_seconds_per_invoice": 2.71
+  },
+  "rows": [
+    {
+      "text": "TechSoft Ltd — Invoice no. 2026/481\nDate: 14 October 2026\nAnnual design software licence: €1,200.00\nVAT (23%): €276.00\nTotal due: €1,476.00",
+      "expected": {
+        "supplier": "TechSoft Ltd",
+        "invoice_number": "2026/481",
+        "invoice_date": "2026-10-14",
+        "due_date": null,
+        "total_amount": 1476.0,
+        "currency": "EUR",
+        "category": "software"
+      },
+      "predicted": {
+        "supplier": "TechSoft Ltd",
+        "invoice_number": "2026/481",
+        "invoice_date": "2026-10-14",
+        "due_date": null,
+        "total_amount": 1476.0,
+        "currency": "EUR",
+        "category": "software"
+      },
+      "field_ok": {
+        "supplier": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "due_date": true,
+        "total_amount": true,
+        "currency": true,
+        "category": true
+      },
+      "all_ok": true,
+      "note": "'Total due' is an amount, not a deadline: due_date must be null"
+    },
+    {
+      "text": "Dear Clara, invoice #4521 of €1,250.00 from Acme Supplies was due on 15 October and is still unpaid. Please pay as soon as possible to avoid service suspension.",
+      "expected": {
+        "supplier": "Acme Supplies",
+        "invoice_number": "4521",
+        "invoice_date": null,
+        "due_date": "2026-10-15",
+        "total_amount": 1250.0,
+        "currency": "EUR",
+        "category": "supplies"
+      },
+      "predicted": {
+        "supplier": "Acme Supplies",
+        "invoice_number": "4521",
+        "invoice_date": "2026-10-15",
+        "due_date": "2026-10-15",
+        "total_amount": 1250.0,
+        "currency": "EUR",
+        "category": "supplies"
+      },
+      "field_ok": {
+        "supplier": true,
+        "invoice_number": true,
+        "invoice_date": false,
+        "due_date": true,
+        "total_amount": true,
+        "currency": true,
+        "category": true
+      },
+      "all_ok": false,
+      "note": "Only a due date is given, without a year: invoice_date must be null"
+    },
+    {
+      "text": "Invoice no. INV-0093\nDate: 3 October 2026\nConsulting services – September: €2,000.00\nVAT 23%: €460.00\nTotal: €2,460.00",
+      "expected": {
+        "supplier": null,
+        "invoice_number": "INV-0093",
+        "invoice_date": "2026-10-03",
+        "due_date": null,
+        "total_amount": 2460.0,
+        "currency": "EUR",
+        "category": "services"
+      },
+      "predicted": {
+        "supplier": "null",
+        "invoice_number": "INV-0093",
+        "invoice_date": "2026-10-03",
+        "due_date": null,
+        "total_amount": 2460.0,
+        "currency": "EUR",
+        "category": "services"
+      },
+      "field_ok": {
+        "supplier": false,
+        "invoice_number": true,
+        "invoice_date": true,
+        "due_date": true,
+        "total_amount": true,
+        "currency": true,
+        "category": true
+      },
+      "all_ok": false,
+      "note": "No supplier stated: must be null, not invented"
+    },
+    {
+      "text": "Lisbon Taxi Co.\nReceipt date: 22 October\nAirport transfer: €35.00 (VAT included)",
+      "expected": {
+        "supplier": "Lisbon Taxi Co.",
+        "invoice_number": null,
+        "invoice_date": "2026-10-22",
+        "due_date": null,
+        "total_amount": 35.0,
+        "currency": "EUR",
+        "category": "travel"
+      },
+      "predicted": {
+        "supplier": "Lisbon Taxi Co.",
+        "invoice_number": null,
+        "invoice_date": "2026-10-22",
+        "due_date": null,
+        "total_amount": 35.0,
+        "currency": "EUR",
+        "category": "supplies"
+      },
+      "field_ok": {
+        "supplier": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "due_date": true,
+        "total_amount": true,
+        "currency": true,
+        "category": false
+      },
+      "all_ok": false,
+      "note": "Year missing: resolved from the received date; no invoice number"
+    },
+    {
+      "text": "Staples Inc. — Invoice ST-77812\nIssue date: 2026-10-01\nPayment due: 2026-10-31\nPrinter paper and toner: $180.00\nSales tax: $14.40\nTotal: $194.40",
+      "expected": {
+        "supplier": "Staples Inc.",
+        "invoice_number": "ST-77812",
+        "invoice_date": "2026-10-01",
+        "due_date": "2026-10-31",
+        "total_amount": 194.4,
+        "currency": "USD",
+        "category": "supplies"
+      },
+      "predicted": {
+        "supplier": "Staples Inc.",
+        "invoice_number": "ST-77812",
+        "invoice_date": "2026-10-01",
+        "due_date": "2026-10-31",
+        "total_amount": 194.4,
+        "currency": "USD",
+        "category": "supplies"
+      },
+      "field_ok": {
+        "supplier": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "due_date": true,
+        "total_amount": true,
+        "currency": true,
+        "category": true
+      },
+      "all_ok": true,
+      "note": "Both dates present, due date in the future, non-EUR currency"
+    },
+    {
+      "text": "Papelaria Central, Lda.\nFatura n.º FT 2026/1123\nData: 20/10/2026\nVencimento: 19/11/2026\nTotal (IVA incluído): 61,50 €",
+      "expected": {
+        "supplier": "Papelaria Central, Lda.",
+        "invoice_number": "FT 2026/1123",
+        "invoice_date": "2026-10-20",
+        "due_date": "2026-11-19",
+        "total_amount": 61.5,
+        "currency": "EUR",
+        "category": "supplies"
+      },
+      "predicted": {
+        "supplier": "Papelaria Central, Lda.",
+        "invoice_number": "FT 2026/1123",
+        "invoice_date": "2026-10-20",
+        "due_date": "2026-11-19",
+        "total_amount": 61.5,
+        "currency": "EUR",
+        "category": "supplies"
+      },
+      "field_ok": {
+        "supplier": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "due_date": true,
+        "total_amount": true,
+        "currency": true,
+        "category": true
+      },
+      "all_ok": true,
+      "note": "Portuguese invoice: dd/mm/yyyy dates and decimal comma"
+    }
+  ]
+}
