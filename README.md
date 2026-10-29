@@ -17,12 +17,6 @@ It classifies every email, extracts invoice data, alerts on urgent messages and 
 - **Real debugging:** found that the self-correction loop was *causing* hallucinations, by inspecting raw model outputs, and fixed it
 - **Runs fully local** with Ollama, and switches to Gemini or OpenAI by editing `.env`
 
-## 🎬 Demo
-
-| n8n workflow | Urgent email alert | Invoice log |
-|---|---|---|
-| ![n8n workflow](docs/n8n-workflow.png) | ![Telegram alert](docs/telegram-alert.png) | ![Google Sheets](docs/sheets-invoices.png) |
-
 ## ⚙️ How it works
 
 ```mermaid
