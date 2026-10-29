@@ -82,5 +82,19 @@
       "category": "supplies"
     },
     "note": "Portuguese invoice: dd/mm/yyyy dates and decimal comma"
+  },
+  {
+    "text": "Hi Clara, this is a reminder that invoice #7781 from BrightPrint Lda for printing services, €320.00, must be paid by tomorrow.",
+    "reference_date": "2026-10-29",
+    "expected": {
+      "supplier": "BrightPrint Lda",
+      "invoice_number": "7781",
+      "invoice_date": null,
+      "due_date": "2026-10-30",
+      "total_amount": 320.0,
+      "currency": "EUR",
+      "category": "services"
+    },
+    "note": "Relative date ('tomorrow') must be resolved from the received date"
   }
 ]
